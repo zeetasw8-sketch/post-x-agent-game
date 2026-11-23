@@ -11,7 +11,7 @@ const botDir = process.env.MAKEFUN_BOT_DIR || dirname(fileURLToPath(import.meta.
 const outDir = process.env.MAKEFUN_OUTPUT_DIR || "out";
 const raw = readFileSync(join(botDir, "POST.json"), "utf8");
 const post = JSON.parse(raw);
-if (typeof post.url !== "string" || !/^https:\/\/x\.com\/[^/]+\/status\/\d+$/.test(post.url)) {
+if (!/^https:\/\/x\.com\/[^/]+\/status\/\d+$/.test(post.url ?? "")) {
   throw new Error('POST.json must name the X post as {"url": "https://x.com/<handle>/status/<id>"}');
 }
 mkdirSync(outDir, { recursive: true });
